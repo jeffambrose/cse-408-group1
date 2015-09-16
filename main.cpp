@@ -2,7 +2,6 @@
 #include <cmath>
 
 #include "colorinstance.h"
-#include "rgbinstance.h"
 
 using namespace std;
 
