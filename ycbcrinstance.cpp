@@ -37,5 +37,27 @@ string YCbCrInstance::toString()
 
 ColorInstance::ColorVector YCbCrInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    YCbCrInstance *rother = (YCbCrInstance *)other;
+
+    float ydist = rother->_y - _y;
+    float cbdist = rother->_cb - _cb;
+    float crdist = rother->_cr - _cr;
+
+    float ystep = ydist / partitions;
+    float cbstep = cbdist / partitions;
+    float crstep = crdist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new YCbCrInstance(
+                _y + (ystep/2) + i*ystep,
+                _cb + (cbstep/2) + i*cbstep,
+                _cr + (crstep/2) + i*crstep
+            );
+    }
+
+    return v;
 }

@@ -37,5 +37,27 @@ string HSLInstance::toString()
 
 ColorInstance::ColorVector HSLInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    HSLInstance *rother = (HSLInstance *)other;
+
+    float hdist = rother->_h - _h;
+    float sdist = rother->_s - _s;
+    float ldist = rother->_l - _l;
+
+    float hstep = hdist / partitions;
+    float sstep = sdist / partitions;
+    float lstep = ldist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new HSLInstance(
+                _h + (hstep/2) + i*hstep,
+                _s + (sstep/2) + i*sstep,
+                _l + (lstep/2) + i*lstep
+            );
+    }
+
+    return v;
 }

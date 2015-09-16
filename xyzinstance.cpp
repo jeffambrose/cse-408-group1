@@ -37,5 +37,27 @@ string XYZInstance::toString()
 
 ColorInstance::ColorVector XYZInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    XYZInstance *rother = (XYZInstance *)other;
+
+    float xdist = rother->_x - _x;
+    float ydist = rother->_y - _y;
+    float zdist = rother->_z - _z;
+
+    float xstep = xdist / partitions;
+    float ystep = ydist / partitions;
+    float zstep = zdist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new XYZInstance(
+                _x + (xstep/2) + i*xstep,
+                _y + (ystep/2) + i*ystep,
+                _z + (zstep/2) + i*zstep
+            );
+    }
+
+    return v;
 }

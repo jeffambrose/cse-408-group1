@@ -37,7 +37,7 @@ string RGBInstance::toString()
 
 ColorInstance::ColorVector RGBInstance::interpolate(ColorInstance *other, int partitions)
 {
-    if (other->getName().compare(ColorInstance::COLOR_RGB) != 0)
+    if (other->getName().compare(getName()) != 0)
         return ColorVector();
 
     ColorVector v(partitions);

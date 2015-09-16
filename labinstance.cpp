@@ -35,7 +35,29 @@ string LABInstance::toString()
     return ss.str();
 }
 
-ColorInstance::ColorInstance::ColorVector LABInstance::interpolate(ColorInstance *other, int partitions)
+ColorInstance::ColorVector LABInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    LABInstance *rother = (LABInstance *)other;
+
+    float ldist = rother->_l - _l;
+    float adist = rother->_a - _a;
+    float bdist = rother->_b - _b;
+
+    float lstep = ldist / partitions;
+    float astep = adist / partitions;
+    float bstep = bdist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new LABInstance(
+                _l + (lstep/2) + i*lstep,
+                _a + (astep/2) + i*astep,
+                _b + (bstep/2) + i*bstep
+            );
+    }
+
+    return v;
 }

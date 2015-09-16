@@ -37,5 +37,27 @@ string YUVInstance::toString()
 
 ColorInstance::ColorVector YUVInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    YUVInstance *rother = (YUVInstance *)other;
+
+    float ydist = rother->_y - _y;
+    float udist = rother->_u - _u;
+    float vdist = rother->_v - _v;
+
+    float ystep = ydist / partitions;
+    float ustep = udist / partitions;
+    float vstep = vdist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new YUVInstance(
+                _y + (ystep/2) + i*ystep,
+                _u + (ustep/2) + i*ustep,
+                _v + (vstep/2) + i*vstep
+            );
+    }
+
+    return v;
 }

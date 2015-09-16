@@ -37,5 +37,27 @@ string YIQInstance::toString()
 
 ColorInstance::ColorVector YIQInstance::interpolate(ColorInstance *other, int partitions)
 {
-    return ColorVector();
+    if (other->getName().compare(getName()) != 0)
+        return ColorVector();
+
+    ColorVector v(partitions);
+    YIQInstance *rother = (YIQInstance *)other;
+
+    float ydist = rother->_y - _y;
+    float idist = rother->_i - _i;
+    float qdist = rother->_q - _q;
+
+    float ystep = ydist / partitions;
+    float istep = idist / partitions;
+    float qstep = qdist / partitions;
+
+    for (int i = 0; i < partitions; i++) {
+        v[i] = new YIQInstance(
+                _y + (ystep/2) + i*ystep,
+                _i + (istep/2) + i*istep,
+                _q + (qstep/2) + i*qstep
+            );
+    }
+
+    return v;
 }
