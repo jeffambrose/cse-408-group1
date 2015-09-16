@@ -1,5 +1,7 @@
 #include "xyzinstance.h"
 
+using namespace std;
+
 XYZInstance::XYZInstance()
 {
     _x = -1;
@@ -23,5 +25,17 @@ void XYZInstance::readInstance()
     cout << "Z [0, 1]: ";
     cin >> _z;
 
-    cout << "Read " << getName() << "(" << _x << "," << _y << "," << _z << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string XYZInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _x << "," << _y << "," << _z << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorVector XYZInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

@@ -1,5 +1,7 @@
 #include "labinstance.h"
 
+using namespace std;
+
 LABInstance::LABInstance()
 {
     _l = -1;
@@ -23,5 +25,17 @@ void LABInstance::readInstance()
     cout << "B [-1, 1]: ";
     cin >> _b;
 
-    cout << "Read " << getName() << "(" << _l << "," << _a << "," << _b << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string LABInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _l << "," << _a << "," << _b << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorInstance::ColorVector LABInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

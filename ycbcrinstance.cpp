@@ -1,5 +1,7 @@
 #include "ycbcrinstance.h"
 
+using namespace std;
+
 YCbCrInstance::YCbCrInstance()
 {
     _y = -1;
@@ -23,5 +25,17 @@ void YCbCrInstance::readInstance()
     cout << "Cr [-1, 1]: ";
     cin >> _cr;
 
-    cout << "Read " << getName() << "(" << _y << "," << _cb << "," << _cr << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string YCbCrInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _y << "," << _cb << "," << _cr << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorVector YCbCrInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

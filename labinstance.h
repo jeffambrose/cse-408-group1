@@ -7,9 +7,16 @@ class LABInstance : public ColorInstance
 {
 public:
     LABInstance();
+    LABInstance(float l, float a, float b) {
+        _l = l;
+        _a = a;
+        _b = b;
+    }
 
-    string getName();
+    std::string getName();
     void readInstance();
+    ColorVector interpolate(ColorInstance *other, int partitions);
+    std::string toString();
 
 private:
     float _l;

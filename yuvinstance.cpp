@@ -1,5 +1,7 @@
 #include "yuvinstance.h"
 
+using namespace std;
+
 YUVInstance::YUVInstance()
 {
     _y = -1;
@@ -23,5 +25,17 @@ void YUVInstance::readInstance()
     cout << "V [-0.5, 0.5]: ";
     cin >> _v;
 
-    cout << "Read " << getName() << "(" << _y << "," << _u << "," << _v << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string YUVInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _y << "," << _u << "," << _v << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorVector YUVInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

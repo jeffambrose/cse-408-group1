@@ -1,5 +1,7 @@
 #include "yiqinstance.h"
 
+using namespace std;
+
 YIQInstance::YIQInstance()
 {
     _y = -1;
@@ -23,5 +25,17 @@ void YIQInstance::readInstance()
     cout << "Q [-1, 1]: ";
     cin >> _q;
 
-    cout << "Read " << getName() << "(" << _y << "," << _i << "," << _q << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string YIQInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _y << "," << _i << "," << _q << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorVector YIQInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

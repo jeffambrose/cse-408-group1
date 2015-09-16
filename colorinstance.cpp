@@ -8,6 +8,8 @@
 #include "yiqinstance.h"
 #include "hslinstance.h"
 
+using namespace std;
+
 const string ColorInstance::COLOR_RGB = "RGB";
 const string ColorInstance::COLOR_XYZ = "XYZ";
 const string ColorInstance::COLOR_LAB = "Lab";
@@ -32,32 +34,32 @@ ColorInstance *ColorInstance::makeInstance(string type)
         return instance;
     }
     else if (COLOR_XYZ.compare(type) == 0) {
-        XYZInstance *instance = instance = new XYZInstance;
+        XYZInstance *instance = new XYZInstance;
         instance->readInstance();
         return instance;
     }
     else if (COLOR_LAB.compare(type) == 0) {
-        LABInstance *instance = instance = new LABInstance;
+        LABInstance *instance = new LABInstance;
         instance->readInstance();
         return instance;
     }
     else if (COLOR_YUV.compare(type) == 0) {
-        YUVInstance *instance = instance = new YUVInstance;
+        YUVInstance *instance  = new YUVInstance;
         instance->readInstance();
         return instance;
     }
     else if (COLOR_YCBCR.compare(type) == 0) {
-        YCbCrInstance *instance = instance = new YCbCrInstance;
+        YCbCrInstance *instance = new YCbCrInstance;
         instance->readInstance();
         return instance;
     }
     else if (COLOR_YIQ.compare(type) == 0) {
-        YIQInstance *instance = instance = new YIQInstance;
+        YIQInstance *instance = new YIQInstance;
         instance->readInstance();
         return instance;
     }
     else if (COLOR_HSL.compare(type) == 0) {
-        HSLInstance *instance = instance = new HSLInstance;
+        HSLInstance *instance = new HSLInstance;
         instance->readInstance();
         return instance;
     }

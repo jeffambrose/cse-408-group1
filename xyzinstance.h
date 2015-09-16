@@ -7,9 +7,16 @@ class XYZInstance : public ColorInstance
 {
 public:
     XYZInstance();
+    XYZInstance(float x, float y, float z) {
+        _x = x;
+        _y = y;
+        _z = z;
+    }
 
-    string getName();
+    std::string getName();
     void readInstance();
+    ColorVector interpolate(ColorInstance *other, int partitions);
+    std::string toString();
 
 private:
     float _x;

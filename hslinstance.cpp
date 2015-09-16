@@ -1,5 +1,7 @@
 #include "hslinstance.h"
 
+using namespace std;
+
 HSLInstance::HSLInstance()
 {
     _h = -1;
@@ -23,5 +25,17 @@ void HSLInstance::readInstance()
     cout << "L [0, 1]: ";
     cin >> _l;
 
-    cout << "Read " << getName() << "(" << _h << "," << _s << "," << _l << ")" << endl;
+    cout << "Read " << toString() << endl;
+}
+
+string HSLInstance::toString()
+{
+    stringstream ss;
+    ss << getName() << "(" << _h << "," << _s << "," << _l << ")";
+    return ss.str();
+}
+
+ColorInstance::ColorVector HSLInstance::interpolate(ColorInstance *other, int partitions)
+{
+    return ColorVector();
 }

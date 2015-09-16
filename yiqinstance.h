@@ -7,9 +7,16 @@ class YIQInstance : public ColorInstance
 {
 public:
     YIQInstance();
+    YIQInstance(float y, float i, float q) {
+        _y = y;
+        _i = i;
+        _q = q;
+    }
 
-    string getName();
+    std::string getName();
     void readInstance();
+    ColorVector interpolate(ColorInstance *other, int partitions);
+    std::string toString();
 
 private:
     float _y;

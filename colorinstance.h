@@ -2,29 +2,35 @@
 #define COLORINSTANCE_H
 
 #include <iostream>
-
-using namespace std;
-
+#include <string>
+#include <sstream>
+#include <vector>
 
 class ColorInstance
 {
 public:
+
+    typedef std::vector<ColorInstance *> ColorVector;
+
     ColorInstance();
 
-    string getName() { return 0; }
-    void readInstance() { }
+    virtual std::string getName() = 0;
+    virtual void readInstance()  = 0;
+    virtual ColorVector interpolate(ColorInstance *other, int partitions) = 0;
 
-    static ColorInstance *makeInstance(string type);
+    virtual std::string toString() = 0;
 
-    static const string COLOR_RGB;
-    static const string COLOR_XYZ;
-    static const string COLOR_LAB;
-    static const string COLOR_YUV;
-    static const string COLOR_YCBCR;
-    static const string COLOR_YIQ;
-    static const string COLOR_HSL;
+    static ColorInstance *makeInstance(std::string type);
 
-    static const string COLOR_SPACES[];
+    static const std::string COLOR_RGB;
+    static const std::string COLOR_XYZ;
+    static const std::string COLOR_LAB;
+    static const std::string COLOR_YUV;
+    static const std::string COLOR_YCBCR;
+    static const std::string COLOR_YIQ;
+    static const std::string COLOR_HSL;
+
+    static const std::string COLOR_SPACES[];
     static const int NUM_COLOR_SPACES;
 };
 

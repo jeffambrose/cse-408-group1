@@ -7,9 +7,16 @@ class YUVInstance : public ColorInstance
 {
 public:
     YUVInstance();
+    YUVInstance(float y, float u, float v) {
+        _y = y;
+        _u = u;
+        _v = v;
+    }
 
-    string getName();
+    std::string getName();
     void readInstance();
+    ColorVector interpolate(ColorInstance *other, int partitions);
+    std::string toString();
 
 private:
     float _y;
